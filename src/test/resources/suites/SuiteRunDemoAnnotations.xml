@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="SuiteRunDemoAnnotations" verbose="1">
+    <groups>
+        <run>
+            <include name="login"/>
+        </run>
+    </groups>
+
+    <test name="FirstTest">
+        <classes>
+            <class name="com.anhtester.Bai10_Annotations.Demo_Annotations"/>
+<!--            <class name="com.anhtester.Bai10_Annotations.Demo_Annotations_2"/>-->
+        </classes>
+    </test>
+</suite>
