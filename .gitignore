@@ -39,3 +39,7 @@ build/
 .idea/
 exports/
 logs/
+*.png
+*.jpg
+allure-results/
+allure-report/
