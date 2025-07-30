@@ -27,6 +27,16 @@ public class LoginPage {
    private By errorMessageRequiredPassword = By.xpath("//div[contains(text(),'The Password field is required.')]");
 
    //Khai báo các hàm xử lý trong nội bộ trang Login
+
+   public void verifyLoginPageDisplayed() {
+      boolean isElementPresent = driver.findElements(headerLoginPage).size() > 0;
+      Assert.assertTrue(isElementPresent, "Login page is not displayed.");
+   }
+
+   public void navigateToLoginAdminPage() {
+      driver.get(url_login_admin);
+   }
+
    private void enterEmail(String email) {
       driver.findElement(inputEmail).sendKeys(email);
    }
@@ -40,7 +50,7 @@ public class LoginPage {
    }
 
    public void loginCRM(String email, String password) {
-      driver.get(url_login_admin);
+      navigateToLoginAdminPage();
       enterEmail(email);
       enterPassword(password);
       clickLoginButton();
@@ -49,6 +59,21 @@ public class LoginPage {
    public void verifyLoginSuccess() {
       boolean isElementPresent = driver.findElements(By.xpath("//span[normalize-space()='Dashboard']")).size() > 0;
       Assert.assertTrue(isElementPresent, "Login failed or Dashboard not displayed.");
+   }
+
+   public void verifyLoginFailureWithEmailOrPasswordInvalid() {
+      boolean isElementErrorMessage = driver.findElements(errorMessageInvalid).size() > 0;
+      Assert.assertTrue(isElementErrorMessage, "Error message for invalid email not displayed.");
+   }
+
+   public void verifyLoginFailureWithEmailNull() {
+      boolean isElementErrorMessage = driver.findElements(errorMessageRequiredEmail).size() > 0;
+      Assert.assertTrue(isElementErrorMessage, "Error message for required email not displayed.");
+   }
+
+   public void verifyLoginFailureWithPasswordNull() {
+      boolean isElementErrorMessage = driver.findElements(errorMessageRequiredPassword).size() > 0;
+      Assert.assertTrue(isElementErrorMessage, "Error message for required password not displayed.");
    }
 
 }

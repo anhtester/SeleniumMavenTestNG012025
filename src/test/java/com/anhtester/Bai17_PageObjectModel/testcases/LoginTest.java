@@ -11,20 +11,44 @@ public class LoginTest extends BaseTest {
 
    private LoginPage loginPage;
 
-   @Test
+   @Test(priority = 1)
    public void testLoginSuccess() {
       loginPage = new LoginPage(driver);
 
       loginPage.loginCRM("admin@example.com", "123456");
       loginPage.verifyLoginSuccess();
+   }
 
-//      driver.get("https://crm.anhtester.com/admin");
-//      WebUI.setText(driver, By.id("email"), "admin@example.com");
-//      WebUI.setText(driver, By.id("password"), "123456");
-//      WebUI.clickElement(driver, By.xpath("//button[@type='submit']"), 20);
-//      boolean isElementPresent = driver.findElements(By.xpath("//span[normalize-space()='Dashboard']")).size() > 0;
-//      Assert.assertTrue(isElementPresent, "Login failed or Dashboard not displayed.");
+   @Test(priority = 2)
+   public void testLoginFailureWithEmailInvalid() {
+      loginPage = new LoginPage(driver);
+      loginPage.loginCRM("admin123@example.com", "123456");
 
+      loginPage.verifyLoginFailureWithEmailOrPasswordInvalid();
+   }
+
+   @Test(priority = 3)
+   public void testLoginFailureWithPasswordInvalid() {
+      loginPage = new LoginPage(driver);
+      loginPage.loginCRM("admin@example.com", "123");
+
+      loginPage.verifyLoginFailureWithEmailOrPasswordInvalid();
+   }
+
+   @Test(priority = 4)
+   public void testLoginFailureWithEmailNull() {
+      loginPage = new LoginPage(driver);
+      loginPage.loginCRM("", "123456");
+
+      loginPage.verifyLoginFailureWithEmailNull();
+   }
+
+   @Test(priority = 5)
+   public void testLoginFailureWithPasswordNull() {
+      loginPage = new LoginPage(driver);
+      loginPage.loginCRM("admin@example.com", "");
+
+      loginPage.verifyLoginFailureWithPasswordNull();
    }
 
 }
