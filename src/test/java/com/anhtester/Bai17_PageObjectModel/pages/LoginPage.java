@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-public class LoginPage {
+public class LoginPage extends BasePage{
 
    //Khai báo driver trong từng trang
    private WebDriver driver;
@@ -12,6 +12,7 @@ public class LoginPage {
 
    //Khai báo hàm xây dựng cho từng trang
    public LoginPage(WebDriver driver) {
+      super(driver);
       this.driver = driver;
    }
 
