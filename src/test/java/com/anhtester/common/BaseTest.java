@@ -16,7 +16,6 @@ public class BaseTest {
     public void createDriver() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         softAssert = new SoftAssert();
     }
 
