@@ -1,14 +1,10 @@
 package com.anhtester.Bai16_ThucHanhCRM;
 
 import com.anhtester.common.BaseTest;
-import com.anhtester.keywords.WebUI;
+import com.anhtester.keywords.ActionKeyword_OLD;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
 
 public class LoginTest extends BaseTest {
 
@@ -16,9 +12,9 @@ public class LoginTest extends BaseTest {
    public void testLoginSuccess() {
       driver.get("https://crm.anhtester.com/admin");
 
-      WebUI.setText(driver, By.id("email"), "admin@example.com");
-      WebUI.setText(driver, By.id("password"), "123456");
-      WebUI.clickElement(driver, By.xpath("//button[@type='submit']"), 20);
+      ActionKeyword_OLD.setText(driver, By.id("email"), "admin@example.com");
+      ActionKeyword_OLD.setText(driver, By.id("password"), "123456");
+      ActionKeyword_OLD.clickElement(driver, By.xpath("//button[@type='submit']"), 20);
 
       //Assert.assertTrue(driver.findElement(By.xpath("//span[normalize-space()='Dashboard123']")).isDisplayed(), "Login failed or Dashboard not displayed.");
 
@@ -31,9 +27,9 @@ public class LoginTest extends BaseTest {
 
       driver.get("https://crm.anhtester.com/admin");
 
-      WebUI.setText(driver, By.id("email"), "admin12345@example.com");
-      WebUI.setText(driver, By.id("password"), "123456");
-      WebUI.clickElement(driver, By.xpath("//button[@type='submit']"), 20);
+      ActionKeyword_OLD.setText(driver, By.id("email"), "admin12345@example.com");
+      ActionKeyword_OLD.setText(driver, By.id("password"), "123456");
+      ActionKeyword_OLD.clickElement(driver, By.xpath("//button[@type='submit']"), 20);
 
       // Assert that the error message is displayed
       boolean isElementErrorMessage = driver.findElements(By.xpath("//div[@id='alerts']//div[contains(text(),'Invalid email or password')]")).size() > 0;
@@ -49,9 +45,9 @@ public class LoginTest extends BaseTest {
 
       driver.get("https://crm.anhtester.com/admin");
 
-      WebUI.setText(driver, By.id("email"), "admin@example.com");
-      WebUI.setText(driver, By.id("password"), "123456789");
-      WebUI.clickElement(driver, By.xpath("//button[@type='submit']"), 20);
+      ActionKeyword_OLD.setText(driver, By.id("email"), "admin@example.com");
+      ActionKeyword_OLD.setText(driver, By.id("password"), "123456789");
+      ActionKeyword_OLD.clickElement(driver, By.xpath("//button[@type='submit']"), 20);
 
       // Assert that the error message is displayed
       boolean isElementErrorMessage = driver.findElements(By.xpath("//div[@id='alerts']//div[contains(text(),'Invalid email or password')]")).size() > 0;
@@ -67,9 +63,9 @@ public class LoginTest extends BaseTest {
 
       driver.get("https://crm.anhtester.com/admin");
 
-      WebUI.setText(driver, By.id("email"), "");
-      WebUI.setText(driver, By.id("password"), "123456789");
-      WebUI.clickElement(driver, By.xpath("//button[@type='submit']"), 20);
+      ActionKeyword_OLD.setText(driver, By.id("email"), "");
+      ActionKeyword_OLD.setText(driver, By.id("password"), "123456789");
+      ActionKeyword_OLD.clickElement(driver, By.xpath("//button[@type='submit']"), 20);
 
       // Assert that the error message is displayed
       boolean isElementErrorMessage = driver.findElements(By.xpath("//div[contains(text(),'The Email Address field is required.')]")).size() > 0;

@@ -1,6 +1,6 @@
 package com.anhtester.Bai17_PageObjectModel.pages;
 
-import com.anhtester.keywords.WebUI;
+import com.anhtester.keywords.ActionKeyword_OLD;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -22,24 +22,24 @@ public class BasePage {
 
    //Các hàm xử lý chung cho tất cả các trang
    public void logoutSystem(){
-      WebUI.clickElement(driver, iconProfile);
-      WebUI.clickElement(driver, optionLogout);
+      ActionKeyword_OLD.clickElement(driver, iconProfile);
+      ActionKeyword_OLD.clickElement(driver, optionLogout);
    }
 
    public void clickMenuDashboard() {
-      WebUI.clickElement(driver, menuDashboard);
+      ActionKeyword_OLD.clickElement(driver, menuDashboard);
    }
 
    public void clickMenuCustomers() {
-      WebUI.clickElement(driver, menuCustomers);
+      ActionKeyword_OLD.clickElement(driver, menuCustomers);
    }
 
    public void clickMenuProjects() {
-      WebUI.clickElement(driver, menuProjects);
+      ActionKeyword_OLD.clickElement(driver, menuProjects);
    }
 
    public void clickMenuTasks() {
-      WebUI.clickElement(driver, menuTasks);
+      ActionKeyword_OLD.clickElement(driver, menuTasks);
    }
 
 }

@@ -1,13 +1,10 @@
 package com.anhtester.Bai18_PageFactory.pages;
 
-import com.anhtester.common.BaseTest;
-import com.anhtester.keywords.WebUI;
-import org.openqa.selenium.By;
+import com.anhtester.keywords.ActionKeyword_OLD;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.*;
 import org.testng.Assert;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
@@ -77,17 +74,17 @@ public class LoginPage extends BasePage {
 
    private void enterEmail(String email) {
       //inputEmail.sendKeys(email);
-      WebUI.setText(driver, inputEmail, email);
+      ActionKeyword_OLD.setText(driver, inputEmail, email);
    }
 
    private void enterPassword(String password) {
       //inputPassword.sendKeys(password);
-      WebUI.setText(driver, inputPassword, password);
+      ActionKeyword_OLD.setText(driver, inputPassword, password);
    }
 
    private void clickLoginButton() {
       //buttonLogin.click();
-      WebUI.clickElement(driver, buttonLogin);
+      ActionKeyword_OLD.clickElement(driver, buttonLogin);
    }
 
    public void loginCRM(String email, String password) {

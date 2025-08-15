@@ -1,7 +1,7 @@
 package com.anhtester.Bai14_JavaScriptExecutor;
 
 import com.anhtester.common.BaseTest;
-import com.anhtester.keywords.WebUI;
+import com.anhtester.keywords.ActionKeyword_OLD;
 import org.testng.annotations.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By;
@@ -71,9 +71,9 @@ public class DemoJavaScriptExecutor extends BaseTest {
 //      js.executeScript("arguments[0].style.border='3px solid red'", inputEmail);
 //      js.executeScript("arguments[0].style.border='3px solid purple'", inputPassword);
 
-      WebUI.highlightElement(driver, inputEmail);
+      ActionKeyword_OLD.highlightElement(driver, inputEmail);
       Thread.sleep(1000);
-      WebUI.highlightElement(driver, inputPassword, "green");
+      ActionKeyword_OLD.highlightElement(driver, inputPassword, "green");
 
       Thread.sleep(1000);
       js.executeScript("arguments[0].setAttribute('value','admin@example.com');", inputEmail);

@@ -1,6 +1,7 @@
-package com.anhtester.Bai20_21_ThucHanhPOM.pages;
+package com.anhtester.Bai22_23_WebUI.pages;
 
 import com.anhtester.keywords.ActionKeyword_OLD;
+import com.anhtester.keywords.WebUI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +18,7 @@ public class CustomersPage extends BasePage {
    public CustomersPage(WebDriver driver) {
       super(driver);
       this.driver = driver;
+      new WebUI(driver);
    }
 
    // Locators for Customers Summary Page
@@ -50,88 +52,97 @@ public class CustomersPage extends BasePage {
    private By alertMessage = By.xpath("//div[@id='alert_float_1']//span[@class='alert-title']");
 
    public void selectLangauge(String language) {
-      ActionKeyword_OLD.clickElement(driver, dropdownLanguage);
+      WebUI.clickElement(dropdownLanguage);
       String xpathLanguage = "//span[normalize-space()='" + language + "']";
       System.out.println("Selecting language: " + language);
-      ActionKeyword_OLD.clickElement(driver, By.xpath(xpathLanguage));
+      WebUI.clickElement(By.xpath(xpathLanguage));
    }
 
    public void verifyCustomerPageDisplayed() {
-      ActionKeyword_OLD.highlightElement(driver, driver.findElement(headerCustomerPage));
-      boolean isDisplayed = false;
-      try {
-         isDisplayed = driver.findElement(headerCustomerPage).isDisplayed();
-      } catch (NoSuchElementException e) {
-         isDisplayed = false;
-      }
-      System.out.println("Is Customer Page displayed? " + isDisplayed);
+//      ActionKeyword_OLD.highlightElement(driver.findElement(headerCustomerPage));
+//      boolean isDisplayed = false;
+//      try {
+//         isDisplayed = driver.findElement(headerCustomerPage).isDisplayed();
+//      } catch (NoSuchElementException e) {
+//         isDisplayed = false;
+//      }
+//      System.out.println("Is Customer Page displayed? " + isDisplayed);
+
+      boolean isDisplayed = WebUI.checkElementExist(headerCustomerPage);
 
       Assert.assertTrue(isDisplayed, "Customer Page is not displayed!");
    }
 
    public void clickAddNewCustomerButton() {
-      ActionKeyword_OLD.clickElement(driver, buttonAddNewCustomer);
+      WebUI.clickElement(buttonAddNewCustomer);
    }
 
    public void fillDataNewCustomer(String company, String group, String currency, String language, String country) {
-      ActionKeyword_OLD.setText(driver, inputCompany, company);
-      ActionKeyword_OLD.setText(driver, inputVatNumber, "10");
-      ActionKeyword_OLD.setText(driver, inputPhone, "09392006009");
-      ActionKeyword_OLD.setText(driver, inputWebsite, "https://anhtester.com");
-      ActionKeyword_OLD.setText(driver, inputAddress, "123 Street, City Center");
-      ActionKeyword_OLD.setText(driver, inputCity, "Can Tho");
-      ActionKeyword_OLD.setText(driver, inputState, "Can Tho");
-      ActionKeyword_OLD.setText(driver, inputZip, "12345");
+      WebUI.setText(inputCompany, company);
+      WebUI.setText(inputVatNumber, "10");
+      WebUI.setText(inputPhone, "09392006009");
+      WebUI.setText(inputWebsite, "https://anhtester.com");
+      WebUI.setText(inputAddress, "123 Street, City Center");
+      WebUI.setText(inputCity, "Can Tho");
+      WebUI.setText(inputState, "Can Tho");
+      WebUI.setText(inputZip, "12345");
 
       // Select Group
-      ActionKeyword_OLD.clickElement(driver, dropdownGroups);
-      ActionKeyword_OLD.setText(driver, inputSearchGroups, group);
-      ActionKeyword_OLD.clickElement(driver, By.xpath("//span[normalize-space()='" + group + "']"));
-      ActionKeyword_OLD.clickElement(driver, dropdownGroups); // Close the dropdown
+      WebUI.clickElement(dropdownGroups);
+      WebUI.setText(inputSearchGroups, group);
+      WebUI.clickElement(By.xpath("//span[normalize-space()='" + group + "']"));
+      WebUI.clickElement(dropdownGroups); // Close the dropdown
 
       // Select Currency
-      ActionKeyword_OLD.clickElement(driver, dropdownCurrency);
-      ActionKeyword_OLD.setText(driver, inputSearchCurrency, currency);
-      ActionKeyword_OLD.clickElement(driver, By.xpath("//span[contains(text(),'" + currency + "')]"));
+      WebUI.clickElement(dropdownCurrency);
+      WebUI.setText(inputSearchCurrency, currency);
+      WebUI.clickElement(By.xpath("//span[contains(text(),'" + currency + "')]"));
 
       // Select Language
       selectLangauge(language);
 
       // Select Country
-      ActionKeyword_OLD.clickElement(driver, dropdownCountry);
-      ActionKeyword_OLD.setText(driver, inputSearchCountry, country);
-      ActionKeyword_OLD.clickElement(driver, By.xpath("//span[normalize-space()='" + country + "']"));
+      WebUI.clickElement(dropdownCountry);
+      WebUI.setText(inputSearchCountry, country);
+      WebUI.clickElement(By.xpath("//span[normalize-space()='" + country + "']"));
    }
 
    public void clickSaveButton() {
-      ActionKeyword_OLD.clickElement(driver, buttonSave);
+      WebUI.clickElement(buttonSave);
    }
 
    public void verifyAlertMessageSuccessDisplayed() {
-      boolean isDisplayed = false;
-      try {
-         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-         wait.until(ExpectedConditions.visibilityOfElementLocated(alertMessage));
-         isDisplayed = driver.findElement(alertMessage).isDisplayed();
-         ActionKeyword_OLD.highlightElement(driver, driver.findElement(alertMessage));
-      } catch (NoSuchElementException e) {
-         isDisplayed = false;
-      }
-      System.out.println("Is Alert message displayed? " + isDisplayed);
+//      boolean isDisplayed = false;
+//      try {
+//         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//         wait.until(ExpectedConditions.visibilityOfElementLocated(alertMessage));
+//         isDisplayed = driver.findElement(alertMessage).isDisplayed();
+//         ActionKeyword_OLD.highlightElement(driver, driver.findElement(alertMessage));
+//      } catch (NoSuchElementException e) {
+//         isDisplayed = false;
+//      }
+      boolean isDisplayed = WebUI.checkElementExist(alertMessage, 5, 1000);
+      WebUI.logConsole("Is Alert message displayed? " + isDisplayed);
       Assert.assertTrue(isDisplayed, "Alert message is not displayed!");
 
-      String alertText = driver.findElement(alertMessage).getText();
-      System.out.println("Alert message: " + alertText);
+      //String alertText = driver.findElement(alertMessage).getText();
+
+      String alertText = WebUI.getElementText(alertMessage);
+
+      //System.out.println("Alert message: " + alertText);
       Assert.assertEquals(alertText, "Customer added successfully.", "Alert message does not match expected!");
    }
 
    public void verifyCustomerDetail(String company, String group, String currency, String language, String country) {
-      String companyValue = driver.findElement(inputCompany).getAttribute("value");
-      System.out.println("Company: " + companyValue);
+//      String companyValue = driver.findElement(inputCompany).getAttribute("value");
+//      System.out.println("Company: " + companyValue);
+      String companyValue = WebUI.getElementAttribute(inputCompany, "value");
       Assert.assertEquals(companyValue, company, "Company value not match.");
 
-      String vatValue = driver.findElement(inputVatNumber).getAttribute("value");
-      System.out.println("VAT: " + vatValue);
-      Assert.assertEquals(vatValue, "11", "VAT value not match.");
+//      String vatValue = driver.findElement(inputVatNumber).getAttribute("value");
+//      System.out.println("VAT: " + vatValue);
+      String vatValue = WebUI.getElementAttribute(inputVatNumber, "value");
+      WebUI.logConsole("VAT: " + vatValue);
+      Assert.assertEquals(vatValue, "10", "VAT value not match.");
    }
 }

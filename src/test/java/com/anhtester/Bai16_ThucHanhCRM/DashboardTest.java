@@ -1,7 +1,7 @@
 package com.anhtester.Bai16_ThucHanhCRM;
 
 import com.anhtester.common.BaseTest;
-import com.anhtester.keywords.WebUI;
+import com.anhtester.keywords.ActionKeyword_OLD;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -10,9 +10,9 @@ public class DashboardTest extends BaseTest {
    @Test
    public void testDashboard_CheckQuickStatisticsTotal() {
       driver.get("https://crm.anhtester.com/admin");
-      WebUI.setText(driver, By.id("email"), "admin@example.com");
-      WebUI.setText(driver, By.id("password"), "123456");
-      WebUI.clickElement(driver, By.xpath("//button[@type='submit']"), 20);
+      ActionKeyword_OLD.setText(driver, By.id("email"), "admin@example.com");
+      ActionKeyword_OLD.setText(driver, By.id("password"), "123456");
+      ActionKeyword_OLD.clickElement(driver, By.xpath("//button[@type='submit']"), 20);
       boolean isElementPresent = driver.findElements(By.xpath("//span[normalize-space()='Dashboard']")).size() > 0;
       Assert.assertTrue(isElementPresent, "Login failed or Dashboard not displayed.");
 
@@ -20,7 +20,7 @@ public class DashboardTest extends BaseTest {
       String totalProjectsOnDashboard = driver.findElement(By.xpath("(//span[normalize-space()='Projects In Progress']/parent::div)/following-sibling::span")).getText();
       System.out.println("Total Projects on Dashboard: " + totalProjectsOnDashboard);
 
-      WebUI.clickElement(driver, By.xpath("//span[normalize-space()='Projects']"));
+      ActionKeyword_OLD.clickElement(driver, By.xpath("//span[normalize-space()='Projects']"));
 
       // Get label số lượng trên trang Projects
       String totalProjectsOnProjectsPage_NotStarted = driver.findElement(By.xpath("//div[@class='_filters _hidden_inputs']//span[normalize-space()='Not Started']/preceding-sibling::span")).getText();

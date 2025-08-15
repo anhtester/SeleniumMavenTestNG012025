@@ -1,6 +1,7 @@
-package com.anhtester.Bai20_21_ThucHanhPOM.pages;
+package com.anhtester.Bai22_23_WebUI.pages;
 
 import com.anhtester.keywords.ActionKeyword_OLD;
+import com.anhtester.keywords.WebUI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -9,6 +10,7 @@ public class BasePage {
 
    public BasePage(WebDriver driver) {
       this.driver = driver;
+      new WebUI(driver);
    }
 
    //Element chung cho tất cả các trang
@@ -16,33 +18,31 @@ public class BasePage {
    public By menuCustomers = By.xpath("//span[normalize-space()='Customers' and @class='menu-text']");
    public By menuProjects = By.xpath("//span[normalize-space()='Projects' and @class='menu-text']");
    public By menuTasks = By.xpath("//span[normalize-space()='Tasks' and @class='menu-text']");
-
    public By iconProfile = By.xpath("//li[@class='icon header-user-profile']");
    public By optionLogout = By.xpath("//a[text()='Logout']");
 
    //Các hàm xử lý chung cho tất cả các trang
    public void logoutSystem() {
-      ActionKeyword_OLD.clickElement(driver, iconProfile);
-      ActionKeyword_OLD.clickElement(driver, optionLogout);
+      WebUI.clickElement(iconProfile);
+      WebUI.clickElement(optionLogout);
    }
 
    public void clickMenuDashboard() {
-      ActionKeyword_OLD.clickElement(driver, menuDashboard);
+      WebUI.clickElement(menuDashboard);
    }
 
    public CustomersPage clickMenuCustomers() {
-      ActionKeyword_OLD.clickElement(driver, menuCustomers);
+      WebUI.clickElement(menuCustomers);
       return new CustomersPage(driver);
    }
 
    public ProjectsPage clickMenuProjects() {
-      ActionKeyword_OLD.clickElement(driver, menuProjects);
-
+      WebUI.clickElement(menuProjects);
       return new ProjectsPage(driver);
    }
 
    public void clickMenuTasks() {
-      ActionKeyword_OLD.clickElement(driver, menuTasks);
+      WebUI.clickElement(menuTasks);
    }
 
 }
