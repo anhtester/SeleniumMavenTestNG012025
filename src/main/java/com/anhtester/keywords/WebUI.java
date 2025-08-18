@@ -1,11 +1,14 @@
 package com.anhtester.keywords;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.time.Duration;
 import java.util.List;
 
@@ -263,4 +266,183 @@ public class WebUI {
       System.out.println("==> CSS value: " + value);
       return value;
    }
+
+   public static void setTextAndKey(By by, String value, Keys key) {
+      waitForPageLoaded();
+      getWebElement(by).sendKeys(value, key);
+      System.out.println("Set text: " + value + " on element " + by);
+   }
+
+   public static void scrollToElement(By by) {
+      JavascriptExecutor js = (JavascriptExecutor) driver;
+      js.executeScript("arguments[0].scrollIntoView(false);", getWebElement(by));
+   }
+
+   public static void scrollToElement(WebElement element) {
+      JavascriptExecutor js = (JavascriptExecutor) driver;
+      js.executeScript("arguments[0].scrollIntoView(false);", element);
+   }
+
+   public static void scrollToElementAtTop(By by) {
+      JavascriptExecutor js = (JavascriptExecutor) driver;
+      js.executeScript("arguments[0].scrollIntoView(true);", getWebElement(by));
+   }
+
+   public static void scrollToElementAtBottom(By by) {
+      JavascriptExecutor js = (JavascriptExecutor) driver;
+      js.executeScript("arguments[0].scrollIntoView(false);", getWebElement(by));
+   }
+
+   public static void scrollToElementAtTop(WebElement element) {
+      JavascriptExecutor js = (JavascriptExecutor) driver;
+      js.executeScript("arguments[0].scrollIntoView(true);", element);
+   }
+
+   public static void scrollToElementAtBottom(WebElement element) {
+      JavascriptExecutor js = (JavascriptExecutor) driver;
+      js.executeScript("arguments[0].scrollIntoView(false);", element);
+   }
+
+   public static void scrollToPosition(int X, int Y) {
+      JavascriptExecutor js = (JavascriptExecutor) driver;
+      js.executeScript("window.scrollTo(" + X + "," + Y + ");");
+   }
+
+   public static boolean moveToElement(By by) {
+      try {
+         Actions action = new Actions(driver);
+         action.moveToElement(getWebElement(by)).release(getWebElement(by)).build().perform();
+         return true;
+      } catch (Exception e) {
+         logConsole(e.getMessage());
+         return false;
+      }
+   }
+
+   public static boolean moveToOffset(int X, int Y) {
+      try {
+         Actions action = new Actions(driver);
+         action.moveByOffset(X, Y).build().perform();
+         return true;
+      } catch (Exception e) {
+         logConsole(e.getMessage());
+         return false;
+      }
+   }
+
+   public static boolean hoverElement(By by) {
+      try {
+         Actions action = new Actions(driver);
+         action.moveToElement(getWebElement(by)).perform();
+         return true;
+      } catch (Exception e) {
+         return false;
+      }
+   }
+
+   public static boolean mouseHover(By by) {
+      try {
+         Actions action = new Actions(driver);
+         action.moveToElement(getWebElement(by)).perform();
+         return true;
+      } catch (Exception e) {
+         return false;
+      }
+   }
+
+   public static boolean dragAndDrop(By fromElement, By toElement) {
+      try {
+         Actions action = new Actions(driver);
+         action.dragAndDrop(getWebElement(fromElement), getWebElement(toElement)).perform();
+         //action.clickAndHold(getWebElement(fromElement)).moveToElement(getWebElement(toElement)).release(getWebElement(toElement)).build().perform();
+         return true;
+      } catch (Exception e) {
+         logConsole(e.getMessage());
+         return false;
+      }
+   }
+
+   public static boolean dragAndDropElement(By fromElement, By toElement) {
+      try {
+         Actions action = new Actions(driver);
+         action.clickAndHold(getWebElement(fromElement)).moveToElement(getWebElement(toElement)).release(getWebElement(toElement)).build().perform();
+         return true;
+      } catch (Exception e) {
+         logConsole(e.getMessage());
+         return false;
+      }
+   }
+
+   public static boolean dragAndDropOffset(By fromElement, int X, int Y) {
+      try {
+         Actions action = new Actions(driver);
+         //Tính từ vị trí click chuột đầu tiên (clickAndHold)
+         action.clickAndHold(getWebElement(fromElement)).pause(1).moveByOffset(X, Y).release().build().perform();
+         return true;
+      } catch (Exception e) {
+         logConsole(e.getMessage());
+         return false;
+      }
+   }
+
+   public static boolean pressENTER() {
+      try {
+         Robot robot = new Robot();
+         robot.keyPress(KeyEvent.VK_ENTER);
+         robot.keyRelease(KeyEvent.VK_ENTER);
+         return true;
+      } catch (Exception e) {
+         return false;
+      }
+   }
+
+   public static boolean pressESC() {
+      try {
+         Robot robot = new Robot();
+         robot.keyPress(KeyEvent.VK_ESCAPE);
+         robot.keyRelease(KeyEvent.VK_ESCAPE);
+         return true;
+      } catch (Exception e) {
+         return false;
+      }
+   }
+
+   public static boolean pressF11() {
+      try {
+         Robot robot = new Robot();
+         robot.keyPress(KeyEvent.VK_F11);
+         robot.keyRelease(KeyEvent.VK_F11);
+         return true;
+      } catch (Exception e) {
+         return false;
+      }
+   }
+
+   public static boolean verifyEquals(Object actual, Object expected) {
+      waitForPageLoaded();
+      System.out.println("Verify equals: " + actual + " and " + expected);
+      boolean check = actual.equals(expected);
+      return check;
+   }
+
+   public static void assertEquals(Object actual, Object expected, String message) {
+      waitForPageLoaded();
+      System.out.println("Assert equals: " + actual + " and " + expected);
+      Assert.assertEquals(actual, expected, message);
+   }
+
+   public static boolean verifyContains(String actual, String expected) {
+      waitForPageLoaded();
+      System.out.println("Verify contains: " + actual + " and " + expected);
+      boolean check = actual.contains(expected);
+      return check;
+   }
+
+   public static void assertContains(String actual, String expected, String message) {
+      waitForPageLoaded();
+      System.out.println("Assert contains: " + actual + " and " + expected);
+      boolean check = actual.contains(expected);
+      Assert.assertTrue(check, message);
+   }
+
 }

@@ -19,9 +19,9 @@ public class CustomerTest extends BaseTest {
       customersPage = dashboardPage.clickMenuCustomers();
       customersPage.verifyCustomerPageDisplayed();
       customersPage.clickAddNewCustomerButton();
-      customersPage.fillDataNewCustomer("Test Customer 1508A1", "VIP", "USD", "Vietnamese", "Vietnam");
+      customersPage.fillDataNewCustomer("Test Customer 1808A1", "VIP", "USD", "Vietnamese", "Vietnam");
       customersPage.clickSaveButton();
       customersPage.verifyAlertMessageSuccessDisplayed();
-      customersPage.verifyCustomerDetail("Test Customer 1508A1", "VIP", "USD", "Vietnamese", "Vietnam");
+      customersPage.verifyCustomerDetail("Test Customer 1808A1", "VIP", "USD", "Vietnamese", "Vietnam");
    }
 }
