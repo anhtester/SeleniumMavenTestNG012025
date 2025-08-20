@@ -173,7 +173,7 @@ public class WebUI {
       return driver.findElements(by);
    }
 
-   public static Boolean checkElementExist(By by) {
+   public static boolean checkElementExist(By by) {
       List<WebElement> listElement = getWebElements(by);
 
       if (listElement.size() > 0) {
