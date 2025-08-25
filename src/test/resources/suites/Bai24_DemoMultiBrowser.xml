@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Bai24_DemoParameter" verbose="1">
-   <test name="ChromeTest">
+   <test name="ChromeTest" parallel="methods">
       <parameter name="browser" value="chrome"/>
 
       <classes>
